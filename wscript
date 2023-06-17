@@ -149,7 +149,7 @@ def configure(conf):
         conf.env['PKGCONFDIR'] = conf.env['LIBDIR'] + '/pkgconfig'
 
     conf.define('EPICHORD_VERSION', conf.env['EPICHORD_VERSION'])
-    conf.define('ROOT_DATA_DIR', os.path.normpath(os.path.join(conf.env['PREFIX'], 'share', APPNAME)))
+    conf.define('ROOT_DATA_DIR', os.path.normpath(os.path.join(conf.env['PREFIX'], 'share', APPNAME)) + "/")
     conf.write_config_header('config.h', remove=False)
 
     flags.flush()
@@ -238,3 +238,32 @@ def build(bld):
             'dragbar.cpp',
     ]:
         prog.source.append(os.path.join("src", source))
+
+    bld.install_files(os.path.normpath(os.path.join(bld.env['PREFIX'], 'share', APPNAME, "gfx")), [
+        "gfx/color.gif",
+        "gfx/conf.gif",
+        "gfx/edit.gif",
+        "gfx/file.gif",
+        "gfx/fork.gif",
+        "gfx/hand.gif",
+        "gfx/help.gif",
+        "gfx/join.gif",
+        "gfx/loop.gif",
+        "gfx/q0.gif",
+        "gfx/q128.gif",
+        "gfx/q16.gif",
+        "gfx/q32.gif",
+        "gfx/q4.gif",
+        "gfx/q64.gif",
+        "gfx/q8.gif",
+        "gfx/scope.gif",
+        "gfx/split.gif"])
+
+    bld.install_files(os.path.normpath(os.path.join(bld.env['PREFIX'], 'share', APPNAME, "doc")), [
+        "doc/README",
+        "doc/color.txt",
+        "doc/manual.txt",
+        "doc/controls.txt",
+        "doc/guide.txt",
+        "doc/midi.txt",
+        "doc/license.txt"])
